@@ -2787,6 +2787,10 @@ a.effect-underline:hover:after {
     background: white;
   }
 
+  .header_logo {
+    left: 127px;
+  }
+
   .menu_title {
     display: block;
     text-align: center;
