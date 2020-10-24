@@ -219,7 +219,7 @@ body.active {
 
 /* Элемент точки */
 
-.slick-dots li.slick-active button {
+.slider .slick-dots li.slick-active button {
   background-color: #000;
   -webkit-transition: 0.4s ease-in-out;
   -o-transition: 0.4s ease-in-out;
@@ -2011,6 +2011,21 @@ form {
   display: none;
 }
 
+.list_desp {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.list_desp .tabs.active::after {
+  display: none;
+}
+
+.swiper-slides2 img {
+  max-width: 100%;
+}
+
 #selectBackground {
   background: #000;
   width: 187px;
@@ -2051,6 +2066,179 @@ form {
 
 #selectBackground ul li a.active {
   background: yellow url("../images/select_bg_active.png") no-repeat;
+}
+
+.list_desp li {
+  margin: 30px;
+}
+
+.description {
+  max-width: 1300px;
+  margin: 0px auto;
+}
+
+.item_desp {
+  position: relative;
+  left: 10%;
+  max-width: 850px;
+  margin: 0px auto;
+}
+
+.list_desp {
+  height: 100px;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slides2 {
+  font-size: 18px;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 30px;
+  overflow: hidden;
+}
+
+.slider2 {
+  max-width: 1500px;
+  margin: 0px auto;
+}
+
+.sliders2 {
+  padding: 15px;
+}
+
+.sliders2 img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.slider2_title h1 {
+  margin-left: 15px;
+}
+
+.slider2 .slick-dots {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.slider2 .slick-dots li {
+  margin: 10px;
+}
+
+.slider2_content {
+  max-width: 1500px;
+  margin: 0px auto;
+}
+
+.slider2_text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.slider2 .slick-slider {
+  padding: 0px;
+}
+
+.slider2_text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 22px;
+}
+
+.slider2_row h1 {
+  font-size: 11px;
+}
+
+.slider2_row h2 {
+  font-size: 13px;
+  padding: 10px 0px;
+}
+
+.slider2_row span {
+  font-size: 13px;
+}
+
+.sliders2 {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 33.333%;
+          flex: 0 1 33.333%;
+}
+
+.slider2_icon {
+  padding-top: 32px;
+  padding-right: 2px;
+}
+
+.slider2_icon img {
+  margin: 5px;
+}
+
+.slider2_icon a {
+  text-decoration: none;
+  border: 0;
+}
+
+.slider2 .slick-dots button {
+  position: relative;
+  font-size: 0;
+  border: 0;
+  height: 10px;
+  width: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sliders2 {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 10%;
+          flex: 0 1 10%;
+}
+
+.slider2 .slick-dots {
+  padding: 0px;
+  padding-left: 18px;
+}
+
+.slider2 .slick-dots li {
+  position: relative;
+}
+
+.slider2 .slick-dots li.slick-active::before {
+  position: absolute;
+  display: block;
+  content: "";
+  background: url("../img/button_back.png") no-repeat;
+  height: 22px;
+  width: 22px;
+  left: -4px;
+  top: 4px;
+}
+
+.slider2_title h1 {
+  padding: 39px 0px;
+}
+
+.slider2 .slick-dots li.slick-active button {
+  background: #000;
+}
+
+/* Активная точка */
+
+/* Элемент точки */
+
+.sliders2 .slick-dots li {
+  font-size: 0;
+  border: 0;
 }
 
 .slider_tovar_item {
@@ -2586,7 +2774,7 @@ a.effect-underline:hover:after {
 .modal {
   background: white;
   width: 68%;
-  height: 17%;
+  height: 100px;
   top: 30px;
   border-radius: 25px;
 }
@@ -2681,6 +2869,22 @@ a.effect-underline:hover:after {
 
   .tovar_description {
     margin: 0px auto;
+  }
+
+  .slider2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+
+  .sliders2 .slick-track {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
   }
 }
 
@@ -3080,6 +3284,23 @@ a.effect-underline:hover:after {
     margin: 0px auto;
     padding: 10px 0px;
   }
+
+  .slider2 .slick-dots {
+    margin: 0px auto;
+    padding: 0px;
+  }
+
+  .slider2_icon {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding-top: 41px;
+    padding-right: 5px;
+  }
+
+  .slider2_icon a {
+    padding: 4px;
+  }
 }
 
 @media (max-width: 570px) {
@@ -3168,7 +3389,10 @@ a.effect-underline:hover:after {
   .swiper-slides img {
     width: 100%;
     max-width: 100%;
-    height: 100%;
+  }
+
+  .swiper-slides {
+    height: 100px;
   }
 
   .products_content3 {
@@ -3194,6 +3418,18 @@ a.effect-underline:hover:after {
   .swiper-pagination-bullet {
     margin: 5px;
     background-color: black;
+  }
+
+  .sku span {
+    font-size: 10px;
+  }
+
+  .category span {
+    font-size: 10px;
+  }
+
+  .tag span {
+    font-size: 10px;
   }
 }
 
@@ -3258,6 +3494,8 @@ a.effect-underline:hover:after {
 .webp #selectBackground ul li a{ background: red url(../images/select_bg_unactive.webp) no-repeat; }
 
 .webp #selectBackground ul li a.active{ background: yellow url(../images/select_bg_active.webp) no-repeat; }
+
+.webp .slider2 .slick-dots li.slick-active::before{ background: url(../img/button_back.webp) no-repeat; }
 
 .webp .brands_item{ background: url(../img/photo1.webp) no-repeat; }
 

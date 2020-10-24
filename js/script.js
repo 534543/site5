@@ -78,7 +78,44 @@ $(document).ready(function () {
         ]
             
     });
+    $('.slider2').slick({
+        arrows:false,
+        dots:true,
+        infinite:false,
+        speed:500,
+        cssEase: 'linear',
+        easing: 'easeInOutExpo',
+        adaptiveHeight: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
 
+        responsive:[
+            {
+                breakpoint: 999,
+                settings: {
+                  slidesToShow: 3,
+                  slidesToScroll: 3,
+                },
+              },
+              {
+                breakpoint: 680,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 2,
+                }
+              },
+              {
+                breakpoint: 374,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                }
+              },
+              
+        ],
+       
+            
+    });
 
     $(window).scroll(function(event) {
         let st = $(this).scrollTop();
@@ -387,6 +424,8 @@ move();
 const slider = document.querySelector('.slider-main');
 const sliderNav = document.querySelector('.sliders-nav');
 
+
+
 let mySwiperNav = new Swiper(sliderNav ,{
     slidesPerView:5,
     spaceBetween:10,
@@ -407,10 +446,14 @@ let mySwiper = new Swiper(slider ,{
     },
     pagination: {
         el: '.swiper-pagination',
-        
         clickable: true,
       },
 });
+
+
+
+
+
 ;
 /////////////////// product +/-
 $(document).ready(function() {
