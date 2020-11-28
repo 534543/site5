@@ -10,12 +10,12 @@ $(document).ready(function () {
 
         let burger = $('.header_burger');
         let menu = $('.header_list');
-
+        let body = $('body');
         $(document).mouseup(function (e) {
             if(! burger.is(e.target) && burger.has(e.target).length === 0 && ! menu.is(e.target) && burger.has(e.target).length === 0){
                 $(menu).removeClass('active');
                 $(burger).removeClass('active');
-                
+                $(body).removeClass('active');
             }
 
         });
@@ -25,24 +25,27 @@ $(document).ready(function () {
   
     
     $('.bag_img').on('click',function(){
-        $('.bag').toggleClass('active');
+        $('.bag,body').toggleClass('active');
 
 
         let burger = $('.bag');
-       
+        let body = $('body');
 
         $(document).mouseup(function (e) {
             if(! burger.is(e.target) && burger.has(e.target).length === 0  && burger.has(e.target).length === 0){
                
                 $(burger).removeClass('active');
-               
+                $(body).removeClass('active');
             }
 
         });
        
     });
    
-
+    $('.bag_close').on('click',function(){
+        $('body').removeClass('active');
+        $('.bag').removeClass('active');
+    })
 
     
     
@@ -416,7 +419,7 @@ $(document).ready(function() {
   // product +/-;
 let calculate = document.getElementById("calculation");
 let count = document.getElementById("buttonCountNumber");
-calculation = document.getElementById("calculation").innerHTML;
+let calculation = document.getElementById("calculation").innerHTML;
 
 document.getElementById("buttonCountPlus").onclick = function() {
   let countPlus = count.innerHTML;
@@ -609,13 +612,13 @@ document.querySelectorAll('.tabs').forEach((item) => {
 
 
 
-const basketItems = document.querySelector('.bag_tovar_item');
+const basketItems = document.querySelectorAll('.bag_tovar_item');
 
-basketItems.forEach( el => {
-    if(el.target.classList.contains('tovar_clear')){
-        console.log('dasdas');
-    }
-    
+basketItems.forEach((el) => {
+    let close = el.querySelector('.tovar_clear');
+    close.addEventListener('click', () =>{
+        
+    })
 })
 
 
