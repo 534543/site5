@@ -120,7 +120,13 @@ $(document).ready(function () {
     })
     $('.button_show').click(function(event){
         $(this).toggleClass('active').next().slideToggle(300);
-        
+        let activeButton = document.querySelector('.button_show.active');
+
+        if(activeButton){
+            document.querySelector('.button_show').textContent = 'HIDE FILTER';
+        }else{
+            document.querySelector('.button_show').textContent = 'SHOW FILTER';
+        }
     })
     $('.button_hide').click(function(event){
         $('.block_title').removeClass('active');
@@ -156,6 +162,296 @@ $(document).ready(function () {
    
     
 });
+
+
+
+
+
+const basketItems = document.querySelectorAll('.bag_tovar_item');
+const basket = document.querySelector('.bag_list');
+const priceFull = document.querySelector('.full_price');
+
+let fullPrice = 0;
+
+
+const priceWithoutSpaces = (str) => {
+    return str.replace(/\s/g, '');
+}
+
+const normalPrice = (str) => {
+    return String(str).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1');
+}
+
+
+
+const plusFullPrice = (currentPrice) => {
+    return fullPrice += currentPrice;
+};
+const minusFullPrice = (currentPrice) => {
+    return fullPrice -= currentPrice;
+};
+
+const printFullPrice = () => {
+    priceFull.textContent = `${normalPrice(fullPrice)}`; 
+}
+
+
+//шаблон товара
+const renderItem = (text,img,price,id) => {
+    return `
+    <li class="bag_tovar_item" data-name-item="${text}" data-id="${id}">
+    <div class="tovar_img">
+    
+    <img class="tovar_clear" src="img/clear_button.png" alt="">
+    
+    <div class="tovar_photo"><img src="${img}" alt=""></div></div>
+    <div class="tovar_bottom">
+        <span>${text}</span>
+        <div class="size">
+            <span class="size_item size_it">24x</span>
+            <span class="size_item size_it">25x</span>
+            <span class="size_item size_it">26x</span>
+            <span class="size_item size_it">27x</span>
+            <span class="size_item size_it">28x</span>
+        </div>
+        
+        <div class="product__col-wrap">
+        <button class="minus">-</button>
+        <div class="input_item">1</div>
+        <button class="plus">+</button>
+        </div>
+        <div class="product_full_price"><div class="products_price" data-price="${price}">${price}</div><div class="currency"> $</div>  </div>  
+    </li>
+    `;
+};
+
+
+
+const catalogItem = document.querySelectorAll('.products_content3');
+
+//количество товара
+const printQuantity = () => {
+    const lengthItemContent = document.querySelector('.bag_list').children.length;
+    const imgBag = document.querySelector('.length_item').textContent = lengthItemContent;
+};
+
+
+/*const initClass = () => {
+    
+    /*window.addEventListener('DOMContentLoaded', () => {
+        catalogItem.forEach(el => {
+            let classItem = el.querySelector('.add');
+            
+            classItem.addEventListener('click', () => {
+                localStorage.setItem('class', classItem.querySelector('_add--active'));
+            });
+            if(localStorage.getItem('class') === true) {
+                document.querySelector('.add').classList.add('_add--active');
+               
+            };
+           
+
+        })
+    })
+    $(document).ready(function() {
+        $(function() {
+            $('.add').click(function() {
+              $(this).toggleClass('_add--active')
+              window.localStorage.setItem('test' + this.dataset.id, $(this).hasClass('_add--active'));
+            });
+          
+            $('.add').each(function() {
+              var id = 'test' + this.dataset.id;
+              if (localStorage.getItem(id) && localStorage.getItem(id) == "true") {
+                $(this).addClass('_add--active');
+              }
+            })
+           
+          });
+    })
+   
+};
+*/
+
+//удаление товара по клику
+const deletePrducts = (itemBasket) => {
+    let id = itemBasket.dataset.id;
+
+    document.querySelector(`.bag_tovar_item[data-id="${id}"]`).classList.remove('_active--item');
+    document.querySelector(`.bag_tovar_item[data-id="${id}"]`).remove();
+    if(document.querySelector(`.products_content3[data-id="${id}"]`)){
+        document.querySelector(`.products_content3[data-id="${id}"]`).querySelector('.add').disabled = false;
+    }
+   
+    let currentPrice = parseInt(itemBasket.querySelector('.products_price').textContent);
+    
+    console.log(fullPrice);
+    minusFullPrice(currentPrice);
+    printFullPrice();
+   
+    printQuantity(); 
+    updateStorages();
+}
+
+
+//тут и дауну понятно)
+const quantity = () =>{
+    
+    document.querySelector('.bag_list').addEventListener('click', (el) =>{
+        if(el.target.classList.contains('plus')){
+            plusFuction(el.target.closest('.bag_tovar_item'));
+        }
+        if(el.target.classList.contains('minus')){
+            minusFuction(el.target.closest('.bag_tovar_item'));
+        }
+    })
+};
+
+
+
+//увилечение количество одного товара
+const  plusFuction = (el) => {
+   let id = el.dataset.id;
+   
+   let input = parseInt(el.querySelector('.input_item').textContent);
+
+   input++;
+
+   el.querySelector('.input_item').textContent = input;
+
+   let price = parseInt(el.querySelector('.products_price').textContent) + parseInt(el.querySelector('.products_price').dataset.price);
+   
+   let currentPrice = el.querySelector('.products_price').textContent = price;
+
+   let priceNormal =  parseInt(el.querySelector('.products_price').dataset.price);
+
+   plusFullPrice(priceNormal);
+   printFullPrice();
+   updateStorages();
+   console.log(currentPrice);
+   console.log(fullPrice);
+   
+};
+//уменжение количество одного товара
+const  minusFuction = (el) => {
+    let id = el.dataset.id;
+    
+    
+    let input = parseInt(el.querySelector('.input_item').textContent);
+    
+    input--;
+    
+    el.querySelector('.input_item').textContent = input;
+    
+    let price = parseInt(el.querySelector('.products_price').textContent) - parseInt(el.querySelector('.products_price').dataset.price);
+   
+   let currentPrice = el.querySelector('.products_price').textContent = price;
+
+   
+   
+   let priceNormal =  parseInt(el.querySelector('.products_price').dataset.price);
+   minusFullPrice(priceNormal);
+   printFullPrice();
+   updateStorages();
+    console.log(input);
+    console.log(currentPrice);
+    
+};
+
+
+
+
+//рендер товара
+const catalog = () => {
+catalogItem.forEach((el) => {   
+    el.querySelector('.add').addEventListener('click',(e)=>{
+    
+        let button = el.querySelector('.add').disabled = true;
+
+        let text = el.dataset.name;
+
+        let img = el.querySelector('#img').getAttribute('src');
+
+        let price = parseInt(el.querySelector('.price').textContent);
+        
+        let id = el.querySelector('.add').dataset.button;
+
+         
+        plusFullPrice(price);
+        printFullPrice();
+        document.querySelector('.bag_list').insertAdjacentHTML('afterbegin', renderItem(text,img,price,id));
+        
+        document.querySelector('.bag_tovar_item').classList.add('_active--item');
+
+    let itemActive = document.querySelector('._active--item');
+    if(itemActive){
+        document.querySelector('.length_item').style.display = 'block';
+    }else{
+        document.querySelector('.length_item').style.display = 'none';
+    };
+
+    updateStorages();
+    printQuantity();
+    });
+});
+
+}
+
+
+
+const itemsBasket = document.querySelector('.bag_list');
+
+itemsBasket.addEventListener('click',el =>{
+    if(el.target.classList.contains('tovar_clear')){
+        deletePrducts(el.target.closest('.bag_tovar_item'));
+    }
+})
+
+const countSumm = () =>{
+    document.querySelectorAll('.bag_tovar_item').forEach(el =>{
+        fullPrice += parseInt(el.querySelector('.products_price').textContent);
+    })
+}
+
+
+//сохранение товара в LocalStorage, и удаление товара LocalStorage
+const updateStorages = () => {
+    let parent = document.querySelector('.bag_list');
+    let html  = parent.innerHTML;
+    html = html.trim();
+    if(html.length){
+        localStorage.setItem('products',html);
+    }else{
+        localStorage.removeItem('products');
+    }
+};
+
+
+const initialState = () => {
+    if(localStorage.getItem('products') !== null){
+        document.querySelector('.bag_list').innerHTML = localStorage.getItem('products');
+        printQuantity(); 
+        countSumm();
+        printFullPrice();
+        quantity();
+        document.querySelectorAll('.bag_tovar_item').forEach(el => {
+        let id = el.dataset.id;
+        console.log(id);
+        if(document.querySelector(`.products_content3[data-id="${id}"]`)){
+            document.querySelector(`.products_content3[data-id="${id}"]`).querySelector('.add').disabled = true;
+        }
+        })
+    }   
+};
+
+
+
+catalog();
+initialState();
+
+
+
+
 
 // Dynamic Adapt v.1
 // HTML data-da="where(uniq class name),position(digi),when(breakpoint)"
@@ -417,31 +713,54 @@ $(document).ready(function() {
     
   });
   // product +/-;
-let calculate = document.getElementById("calculation");
-let count = document.getElementById("buttonCountNumber");
-let calculation = document.getElementById("calculation").innerHTML;
 
-document.getElementById("buttonCountPlus").onclick = function() {
-  let countPlus = count.innerHTML;
-  if(+countPlus <= 4){
-    count.innerHTML++;
-    let countPlus = count.innerHTML;
-    calculate.innerHTML = calculations(countPlus) ;
-  }
+
+
+let color = document.querySelector('.color_list');
+
+if(color){
+    color.addEventListener('click', (e) =>{
+        if(e.target.classList.contains('color_btn')){
+            document.querySelectorAll('.color_btn').forEach((el) => el.classList.remove('active'));
+    
+            let colorItem = e.target.dataset.color;
+            console.log(colorItem);
+            document.querySelector('.colors_selected span').textContent = colorItem;
+    
+    
+            e.target.classList.add('active');
+    
+            
+        }
+        
+    });
+    
 }
 
-document.getElementById("buttonCountMinus").onclick = function() {
-  let countMinus = count.innerHTML;
-  if(+countMinus >= 2){
-    count.innerHTML--;
-    let countMinus = count.innerHTML;
-    calculate.innerHTML = calculations(countMinus) ;
-  }
-}
 
-calculations = (count) => {
-  return calculation+` * ${count} = ` + (+count)*(+calculation);
-};
+
+/*const size = document.querySelectorAll('.size_item');
+const size_clear = document.querySelector('.size_clear');
+if(size){
+    size.forEach(function(item){
+        item.addEventListener('click', function(){
+            let sizes = item;
+
+            size.forEach(function(item){
+                item.classList.remove('active');
+            })
+        
+            item.classList.add('active');
+
+
+
+        })
+        size_clear.addEventListener('click',function(){
+            item.classList.remove('active');
+        })
+})
+}
+*/;
 
 const btn = document.querySelectorAll('.number_item');
 const filter = document.querySelectorAll('.catalog-filter-item');
@@ -470,9 +789,7 @@ const createChoiceItem = (text) => {
             <div class="clear_item">
                 <img src ="img/clear_icon.png" alt="">
             </div>
-
         </button>
-        
         `
     )
 }
@@ -483,14 +800,11 @@ filter.forEach(el => {
         let checked = el.querySelector('input').checked;
        
         if(checked){
-           
             el.querySelector('.custom-checkbox').classList.add('custom--active');
-            let text = el.querySelector('.custom-checkbox__text').textContent;
-            document.querySelector('.filter_catalog').insertAdjacentHTML('afterbegin', createChoiceItem(text));
-            
-            
-            
 
+            let text = el.querySelector('.custom-checkbox__text').textContent;
+            
+            document.querySelector('.filter_catalog').insertAdjacentHTML('afterbegin', createChoiceItem(text));
         }else{  
             el.querySelector('.custom-checkbox').classList.remove('custom--active');
             
@@ -607,74 +921,6 @@ document.querySelectorAll('.tabs').forEach((item) => {
 });
 ;
 
-
-
-
-
-
-const basketItems = document.querySelectorAll('.bag_tovar_item');
-
-basketItems.forEach((el) => {
-    let close = el.querySelector('.tovar_clear');
-    close.addEventListener('click', () =>{
-        
-    })
-})
-
-
-
-document.querySelector('.clear_bag').addEventListener('click', () => {
-    let item = document.querySelectorAll('.bag_tovar_item');
-    item.forEach(el => {
-        el.remove();
-    })
-})
-/*
-const renderItem = (text,img,price) => {
-    return `
-    <div class="bag_tovar_item">
-    <div class="tovar_img">
-        <div class="tovar_clear"><img src="img/clear_button.png" alt=""></div>
-        <div class="tovar_photo"><img src="${img}" src="" alt=""></div>
-    </div>
-    <div class="tovar_bottom">
-        <span>${text}</span>
-        <div class="size">
-            <span class="size_item size_it">24x</span>
-            <span class="size_item size_it">25x</span>
-            <span class="size_item size_it">26x</span>
-            <span class="size_item size_it">27x</span>
-            <span class="size_item size_it">28x</span>
-        </div>
-        <div id="counter">
-            <div class="cliker_price">
-                <input type="button" id="buttonCountPlus" value="+">
-            <div id="buttonCountNumber">1</div>
-            <input type="button" id="buttonCountMinus" value="-">
-            </div>
-            </div>
-            
-        <div id="calculation">${price}</div>
-    </div>
-</div>
-    `;
-}
-
-const catalogItem = document.querySelectorAll('.catalog_prod');
-
-
-catalogItem.forEach((el) => {   
-    el.querySelector('.add_to_cart').addEventListener('click',(e)=>{
-        
-        let text = el.dataset.name;
-        
-        let img = el.querySelector('#img').getAttribute('src');
-    
-        let price = el.dataset.price;
-       
-        document.querySelector('.bag_tovar').insertAdjacentHTML('afterbegin', renderItem(text,img,price));
-    })
-})*/;
 
 /**
  * Swiper 5.3.7
