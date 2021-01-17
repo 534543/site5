@@ -445,7 +445,7 @@ const initialState = () => {
 };
 
 
-
+quantity();
 catalog();
 initialState();
 
