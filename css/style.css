@@ -4,7 +4,6 @@ body {
   padding: 0;
   margin: 0;
   color: black;
-  width: 100%;
   font-family: 'Jost', sans-serif;
 }
 
@@ -57,6 +56,11 @@ a {
 
 li {
   list-style: none;
+}
+
+button {
+  font-family: 'Jost', sans-serif;
+  outline: none;
 }
 
 body.active {
@@ -778,6 +782,24 @@ body.active {
 
 .twitter img {
   padding-left: 16px;
+}
+
+.size_item {
+  background: none;
+  font-size: 14px;
+}
+
+.size_item.active_btn {
+  border: 1px solid #000;
+}
+
+.color_btn.active .color {
+  border: 1px solid #000;
+}
+
+.color__item {
+  padding-left: 3px;
+  text-transform: capitalize;
 }
 
 .tovar_conteiner {
@@ -3175,69 +3197,35 @@ a.effect-underline:hover:after {
   opacity: 1;
 }
 
-.modal-overlay {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  height: 100vh;
-  width: 100%;
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-  z-index: 50;
+/*.modal-overlay {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	display: flex;
+	
+	justify-content: center;
+	height: 100vh;
+	width: 100%;
+	opacity: 0;
+	visibility: hidden;
+    transition: all 0.3s ease-in-out;
+	z-index: 50;
+	
+	
 }
-
-.modal {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  display: none;
-  position: relative;
-}
-
 .modal-overlay--visible {
-  opacity: 1;
-  visibility: visible;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+	opacity: 1;
+	visibility: visible;
+	transition: all 0.3s ease-in-out;
 }
 
 .modal--visible {
-  display: block;
+	display: block;
 }
-
-.modal_title {
-  padding: 15px;
-  margin-left: 15px;
-}
-
-.modal_title h1 {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.modal {
-  background: white;
-  width: 68%;
-  height: 100px;
-  top: 30px;
-  border-radius: 25px;
-}
+*/
 
 .form2 {
   margin-top: 30px;
@@ -3281,14 +3269,6 @@ a.effect-underline:hover:after {
   background: url("../img/search.png") no-repeat;
   left: 0;
   top: -6px;
-}
-
-.modal_close {
-  position: absolute;
-  right: 0;
-  top: 8px;
-  padding-right: 15px;
-  cursor: pointer;
 }
 
 .item_modal {
@@ -3669,6 +3649,17 @@ body.active {
 
 .currency {
   padding-left: 5px;
+}
+
+.size_it {
+  padding: 0px 4px;
+  cursor: pointer;
+}
+
+.active_size {
+  color: #959595;
+  border-right: 1px solid #959595;
+  border-left: 1px solid #959595;
 }
 
 @media (max-width: 1328px) {
