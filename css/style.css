@@ -673,20 +673,6 @@ body.active {
   margin-left: 9px;
 }
 
-.minus {
-  padding-left: 14px;
-  -webkit-transform: translate(0px, -2px);
-      -ms-transform: translate(0px, -2px);
-          transform: translate(0px, -2px);
-}
-
-.plus {
-  padding-right: 14px;
-  -webkit-transform: translate(0px, 5px);
-      -ms-transform: translate(0px, 5px);
-          transform: translate(0px, 5px);
-}
-
 .num-in {
   display: -webkit-box;
   display: -ms-flexbox;
