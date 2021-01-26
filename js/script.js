@@ -1202,6 +1202,7 @@ filter.forEach(el => {
             let text = el.querySelector('.custom-checkbox__text').textContent;
             
             document.querySelector('.filter_catalog').insertAdjacentHTML('afterbegin', createChoiceItem(text));
+            console.log(document.querySelector('.catalog-filter').querySelector('.custom--active').length);
         }else{  
             el.querySelector('.custom-checkbox').classList.remove('custom--active');
             
