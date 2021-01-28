@@ -352,8 +352,10 @@ const  plusFuction = (el) => {
 
    let priceNormal =  parseInt(el.querySelector('.products_price').dataset.price);
 
-
-
+   
+   if(parseInt(el.querySelector('.input_item').textContent) > 1){
+    el.querySelector('.minus').disabled = false;
+}
    plusFullPrice(priceNormal);
    printFullPrice();
    updateStorages();
@@ -379,6 +381,11 @@ const  minusFuction = (el) => {
    
    
    let priceNormal =  parseInt(el.querySelector('.products_price').dataset.price);
+
+
+   if(parseInt(el.querySelector('.input_item').textContent) === 1){
+        el.querySelector('.minus').disabled = true;
+    }
    minusFullPrice(priceNormal);
    printFullPrice();
    updateStorages();
