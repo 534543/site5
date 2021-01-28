@@ -4630,6 +4630,21 @@ body.active {
   }
 }
 
+@media (max-width: 375px) {
+  .color_list {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+
+  .color {
+    margin: 4px;
+  }
+
+  .size_item {
+    padding: 12px 16px;
+  }
+}
+
 @media (max-width: 366px) {
   .sliders-content {
     margin: 0px 79px;
